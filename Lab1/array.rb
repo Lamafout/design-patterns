@@ -19,3 +19,21 @@ def first_pos(array)
   end
   result
 end
+
+def do_selected_method(method, path)
+  file = File.new(path)
+  arr = file.readlines.map(&:chomp).map(&:to_i)
+  result = -1
+  case method
+  when 1
+    result = min_elem(arr)
+  when 2
+    result = first_pos(arr)
+  end
+end
+
+print "Выберите метод, который хотите использовать:\n1 - найти минимальный эелемент массива\n2 - найти первый пололжительный элемент\n"
+method = gets.to_i
+puts "Введите путь к файлу для чтения данных в массив:"
+path = gets.chomp
+puts "Ваш результат: #{do_selected_method(method, path)}"

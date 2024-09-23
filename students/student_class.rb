@@ -1,5 +1,5 @@
 class Student
-  def initialize(surname, name, second_name, id = nil, phone=nil, telegram=nil, email=nil, git=nil)
+  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
     @surname = surname
     @name = name
     @second_name = second_name

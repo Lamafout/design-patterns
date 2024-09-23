@@ -1,5 +1,5 @@
 class Student
-  def initialize(surname, name, second_name, id = 1, phone='', telegram='', email='', git='')
+  def initialize(surname, name, second_name, id = nil, phone=nil, telegram=nil, email=nil, git=nil)
     @surname = surname
     @name = name
     @second_name = second_name
@@ -9,6 +9,12 @@ class Student
     @email = email
     @git = git
   end
+
+  def to_s
+    #get info about student in ine string and return it
+    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
+  end
+
   #TODO заменить на аттибуты
   def id
     @id

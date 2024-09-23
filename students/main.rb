@@ -6,3 +6,4 @@ mark = Student.new('Anikin', 'Mark', 'Andreevich')
 puts amal
 puts sergey
 puts mark
+puts amal.name

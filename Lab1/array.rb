@@ -23,6 +23,7 @@ end
 def do_selected_method(method, path)
   file = File.new(path)
   arr = file.readlines.map(&:chomp).map(&:to_i)
+  file.close
   result = -1
   case method
   when 1

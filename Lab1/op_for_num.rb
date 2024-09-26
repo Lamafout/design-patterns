@@ -16,7 +16,7 @@ def digits(num)
   digits
 end
 
-#task 2.1: реализовать метод подсчёта количества взаимно простых чисел
+#task 2.1: реализовать метод подсчёта количества  чисел взаимно простых with given
 def count_of_deviders(num)
   count = 0
   (1...num).each do |i|
@@ -36,6 +36,7 @@ end
 
 #task 2.3 
 def specific_devider(num)
+  num = num.abs
   max_count = 0
   result = 0
   (1..num).each do |i|

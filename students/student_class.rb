@@ -45,32 +45,39 @@ class Student
       end
   end
 
-  def to_s
-    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
-  end
-
   #статический метод для инкрементирования статического поля и передачи  результата в конструктор
   def self.increment_id
     @id_counter += 1
   end
 
+  #ниже методы валидации строковых необязательных полей
   def self.is_phone_valid?(phone)
     return false if phone.nil?
     !!phone.match(/^\+?[0-9]{10,15}$/)
   end
-
+  
   def self.is_email_valid?(email)
     return false if email.nil?
     !!email.match?(/^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
   end
-
+  
   def self.is_telegram_valid?(telegram)
     return false if telegram.nil?
     !!telegram.match?(/@[a-zA-Z0-9_]{5,}$/)
   end
-
+  
   def self.is_git_valid?(git)
     return false if git.nil?
     !!git.match?(/^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+$/)
+  end
+
+  #переопределение to_s для простого поулчения информации об экземпляре
+  def to_s
+    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
+  end
+
+  #метод для быстрой проверки наличия гита и контакта у экземпляра
+  def validate?
+    !@git.nil? && (!@telegram.nil? || !@email.nil? || !@phone.nil?)
   end
 end

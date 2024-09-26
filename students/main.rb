@@ -7,3 +7,5 @@ puts amal
 puts sergey
 puts mark
 puts amal.validate?
+amal.set_contacts(telegram: '@lamafout')
+puts amal

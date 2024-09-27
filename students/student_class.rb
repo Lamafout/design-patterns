@@ -2,7 +2,7 @@ class Student
   #статическое поле для айди по умолчанию
   @id_counter = 0
 
-  attr_accessor :id, :surname, :name, :second_name, :git
+  attr_accessor :id
   def initialize(surname, name, second_name, id: self.class.increment_id, phone: nil, telegram: nil, email: nil, git: nil)
     @surname = surname
     @name = name
@@ -13,11 +13,15 @@ class Student
   end
 
   def get_info
-    "#{get_fullname}#{"Git: #{@git}, " if !@git.nil?}#{get_contact if !get_contact.nil?}"
+    "#{get_fullname}#{"Git: #{get_git}, " if !@git.nil?}#{get_contact if !get_contact.nil?}"
   end
 
   def get_fullname
     "#{@surname} #{@name[0]}.#{@second_name[0]}."
+  end
+
+  def get_git
+    @git
   end
 
   def get_contact

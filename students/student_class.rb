@@ -1,4 +1,6 @@
-class Student
+require_relative 'person_class.rb'
+
+class Student < Person
   #статическое поле для айди по умолчанию
   @id_counter = 0
 
@@ -70,11 +72,6 @@ class Student
   def self.is_telegram_valid?(telegram)
     return false if telegram.nil?
     telegram.match?(/@[a-zA-Z0-9_]{5,}$/)
-  end
-  
-  def self.is_git_valid?(git)
-    return false if git.nil?
-    git.match?(/^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+$/)
   end
   
   #переопределение to_s для простого поулчения информации об экземпляре

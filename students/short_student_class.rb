@@ -13,7 +13,7 @@ class Short_student < Person
   end
 
   def self.from_string(id: ,string:)
-    new(id: id, fullname: self.class.parse_fullname(string), git: self.class.parse_git(string), contact: self.class.parse_contact(string))
+    new(id: id, fullname: parse_fullname(string), git: parse_git(string), contact: parse_contact(string))
   end
 
   def to_s

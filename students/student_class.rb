@@ -55,7 +55,7 @@ class Student
   
   #переопределение to_s для простого поулчения информации об экземпляре
   def to_s
-    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, Phone: #{@phone}, Telegram: #{@telegram}, Email: #{@email}, Git: #{@git}"
+    "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, #{"Phone: #{@phone}, " if !@phone.nil?}#{"Telegram: #{@telegram}, " if !@telegram.nil?}#{"Email: #{@email}, " if !@email.nil?} #{"Git: #{@git}, " if !@git.nil?}"
   end
   
   #метод для быстрой проверки наличия гита и контакта у экземпляра

@@ -10,11 +10,7 @@ class Student < Person
   end
 
   def get_info
-    "#{get_initials} #{"Git: #{get_git}, " if !@git.nil?}#{get_contact if !get_contact.nil?}"
-  end
-
-  def get_initials
-    "#{@surname} #{@name[0]}.#{@second_name[0]}."
+    "#{get_initials}, #{get_git}, #{get_contact}"
   end
 
   def get_contact

@@ -21,15 +21,11 @@ class Person
     @git
   end
 
-  def self.parse_initials(info_string)
-    info_string[/^[А-Яа-яёЁA-Za-z\-]+ [А-Яа-яA-Za-z]\.[А-Яа-яA-Za-z]\./]
-  end
-
-  def self.parse_git(info_string)
-    info_string[/Git: ([^,]+)/, 1]
-  end
-
-  def self.parse_contact(info_string)
-    info_string[/(phone|email|telegram):\s?(\S+)/, 0]
+  def get_initials
+    if @initials
+      @initials
+    else
+      "#{@surname} #{@name[0]}.#{@second_name[0]}."
+    end
   end
 end

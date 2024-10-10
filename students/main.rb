@@ -7,6 +7,6 @@ mark = Student.new('Anikin', 'Mark', 'Andreevich', email: 'mark.markovnik@gmail.
 puts amal
 puts sergey
 puts mark
-short_amal = Short_student.from_string(id: amal.id, string: amal.get_info)
 puts amal.get_info
+short_amal = Short_student.from_string(id: amal.id, string: amal.get_info)
 puts short_amal

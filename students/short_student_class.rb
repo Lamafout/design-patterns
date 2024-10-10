@@ -1,22 +1,22 @@
 require_relative 'person_class.rb'
 
 class Short_student < Person
-  def initialize(id: nil, fullname: nil, git: nil, contact: nil)
-    @id = id
-    @fullname = fullname
-    @git = git
+  attr_reader :initials, :contact
+  def initialize(id: nil, initials: nil, git: nil, contact: nil)
+    super(id: id, git: git)
+    @initials = initials
     @contact = contact
   end
 
   def self.from_student(student)
-    new(id:student.id, fullname: student.get_fullname, git: student.get_git, contact: student.get_contact)
+    new(id:student.id, initials: student.get_initials, git: get_git, contact: student.get_contact)
   end
 
   def self.from_string(id: ,string:)
-    new(id: id, fullname: parse_fullname(string), git: parse_git(string), contact: parse_contact(string))
+    new(id: id, initials: parse_initials(string), git: parse_git(string), contact: parse_contact(string))
   end
 
   def to_s
-    "ID: #{@id}, Fullname: #{@fullname}, Git: #{@git}, Contact: #{@contact}"
+    "ID: #{@id}, Initials: #{@initials}, Git: #{@git}, Contact: #{@contact}"
   end
 end

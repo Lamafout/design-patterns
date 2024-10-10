@@ -1,29 +1,20 @@
 require_relative 'person_class.rb'
 
 class Student < Person
-  #статическое поле для айди по умолчанию
-  @id_counter = 0
-
-  attr_accessor :id
-  def initialize(surname, name, second_name, id: self.class.increment_id, phone: nil, telegram: nil, email: nil, git: nil)
+  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
     @surname = surname
     @name = name
     @second_name = second_name
-    @id = id
-    self.git = git
+    super(id: id, git: git)
     set_contacts(phone: phone, telegram: telegram, email: email)
   end
 
   def get_info
-    "#{get_fullname}#{"Git: #{get_git}, " if !@git.nil?}#{get_contact if !get_contact.nil?}"
+    "#{get_initials} #{"Git: #{get_git}, " if !@git.nil?}#{get_contact if !get_contact.nil?}"
   end
 
-  def get_fullname
+  def get_initials
     "#{@surname} #{@name[0]}.#{@second_name[0]}."
-  end
-
-  def get_git
-    @git
   end
 
   def get_contact
@@ -37,25 +28,11 @@ class Student < Person
     end
     contact
   end
-  
-  #метод-писатель для гита
-  def git=(new_git)
-      if new_git.nil? || self.class.is_git_valid?(new_git)
-        @git = new_git
-      else
-        raise ArgumentError, "Invalid git link"
-      end
-  end
 
   def set_contacts(telegram: nil, email: nil, phone: nil)
     self.phone = phone if !phone.nil? #проверка на нил, чтобы не было такого, что пользователь решил изменить только один контакт, а из-за этого затёрлись другие
     self.telegram = telegram if !telegram.nil?
     self.email = email if !email.nil?
-  end
-  
-  #статический метод для инкрементирования статического поля и передачи  результата в конструктор
-  def self.increment_id
-    @id_counter += 1
   end
   
   #ниже методы валидации строковых необязательных полей

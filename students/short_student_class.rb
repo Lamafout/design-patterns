@@ -1,7 +1,6 @@
 require_relative 'person_class.rb'
 
 class Short_student < Person
-  attr_reader :initials, :contact
   def initialize(id: nil, initials: nil, git: nil, contact: nil)
     super(id: id, git: git)
     @initials = initials
@@ -24,5 +23,9 @@ class Short_student < Person
 
   def to_s
     "ID: #{@id}, Initials: #{@initials}, Git: #{@git}, Contact: #{@contact}"
+  end
+
+  def get_contact
+    @contact
   end
 end

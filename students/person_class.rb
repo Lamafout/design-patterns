@@ -28,4 +28,8 @@ class Person
       "#{@surname} #{@name[0]}.#{@second_name[0]}."
     end
   end
+
+  def get_contact
+
+  end
 end

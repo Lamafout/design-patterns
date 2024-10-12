@@ -25,7 +25,11 @@ class Short_student < Person
     "ID: #{@id}, Initials: #{@initials}, Git: #{@git}, Contact: #{@contact}"
   end
 
-  def get_contact
+  def initials
+    @initials
+  end
+
+  def contact
     @contact
   end
 end

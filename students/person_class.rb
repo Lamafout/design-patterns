@@ -29,7 +29,16 @@ class Person
     end
   end
 
-  def get_contact
+  def contact
 
+  end
+
+  #метод для быстрой проверки наличия гита и контакта у экземпляра
+  def validate?
+    !@git.nil? && (!@telegram.nil? || !@email.nil? || !@phone.nil?)
+  end
+
+  def self.is_name_valid?(name)
+    name.match?(/^[A-ZА-Я][a-zA-Zа-яА-Я\-]{0,49}$/)
   end
 end

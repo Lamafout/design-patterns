@@ -17,11 +17,8 @@ class Person
     return false if git.nil?
     git.match?(/^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+$/)
   end
-  def get_git
-    @git
-  end
 
-  def get_initials
+  def initials
     if @initials
       @initials
     else

@@ -8,7 +8,7 @@ class Student < Person
   end
 
   def get_info
-    "#{get_initials}, #{get_git}, #{get_contact}"
+    "#{initials}, #{git()}, #{contact}"
   end
 
   def surname=(surname)
@@ -16,6 +16,7 @@ class Student < Person
       @surname = surname
     else 
       raise ArgumentError, "Invalid surname"
+    end
   end
 
   def name=(name)
@@ -23,6 +24,7 @@ class Student < Person
       @name = name
     else 
       raise ArgumentError, "Invalid name"
+    end
   end
 
   def second_name=(second_name)
@@ -30,6 +32,7 @@ class Student < Person
       @second_name = second_name
     else 
       raise ArgumentError, "Invalid second_name"
+    end
   end
 
   def contact

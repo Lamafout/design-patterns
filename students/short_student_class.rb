@@ -8,7 +8,7 @@ class Short_student < Person
   end
 
   def self.from_student(student)
-    new(id:student.id, initials: student.get_initials, git: get_git, contact: student.get_contact)
+    new(id:student.id, initials: student.get_initials, git: git(), contact: student.get_contact)
   end
 
   def self.from_string(id: ,string:)
@@ -23,10 +23,6 @@ class Short_student < Person
 
   def to_s
     "ID: #{@id}, Initials: #{@initials}, Git: #{@git}, Contact: #{@contact}"
-  end
-
-  def initials
-    @initials
   end
 
   def contact

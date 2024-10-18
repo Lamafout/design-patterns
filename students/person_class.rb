@@ -1,8 +1,12 @@
 class Person
-  attr_accessor :id, :git
+  attr_reader :id, :git
   def initialize(id:, git:)
-    @id = id
+    self.id = id
     self.git = git
+  end
+
+  def id=(new_id)
+    @id = new_id
   end
 
   #метод-писатель для гита и его валидатор
@@ -32,7 +36,7 @@ class Person
 
   #метод для быстрой проверки наличия гита и контакта у экземпляра
   def validate?
-    !@git.nil? && (!@telegram.nil? || !@email.nil? || !@phone.nil?)
+    !@git.nil? && (!@telegram.nil? || !@email.nil? || !@phone.nil? || !@contact.nil?)
   end
 
   def self.is_name_valid?(name)

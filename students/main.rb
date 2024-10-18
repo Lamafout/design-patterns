@@ -1,7 +1,7 @@
 require_relative 'student_class'
 require_relative 'short_student_class'
 
-amal = Student.new('Blyagoz', 'Amal', 'Khazretovich', git: 'github.com/lamafout', email: 'lamafout@yandex.ru', telegram: '@lamafout')
+amal = Student.new('Blyagoz', 'Amal', 'Khazretovich', id: 123, git: 'github.com/lamafout', email: 'lamafout@yandex.ru', telegram: '@lamafout')
 sergey = Student.new('Lotarev', 'Sergey', 'Urievuch', phone: '88005553535')
 mark = Student.new('Anikin', 'Mark', 'Andreevich', email: 'mark.markovnik@gmail.com')
 puts amal

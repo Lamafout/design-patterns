@@ -8,7 +8,12 @@ class Processing_array
   def get_index_of_min
     array.index(array.min)
   end
+
   def count_of_elems_in_range(range)
-    array.count { |x| range.include?(x) }
+    array.count { |elem| range.include?(elem) }
+  end
+
+  def count_of_elems_between_mins
+    array.rindex(array.min) - array.index(array.min) - 1
   end
 end

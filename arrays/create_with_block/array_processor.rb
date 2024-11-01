@@ -29,4 +29,15 @@ class Array_processor
     result
   end
 
+  def one?
+    result = 0
+    array.each do |elem|
+      result += 1 if yield elem
+    end
+    if result == 1
+      true
+    else 
+      false
+    end
+  end
 end

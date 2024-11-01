@@ -48,4 +48,12 @@ class Array_processor
     end
      result
   end
+
+  def min_by
+    result = array[0]
+    array.each do |elem|
+      result = elem if yield(elem) < yield(result)
+    end
+    result
+  end
 end

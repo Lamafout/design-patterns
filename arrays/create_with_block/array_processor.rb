@@ -40,4 +40,12 @@ class Array_processor
       false
     end
   end
+
+  def inject(initial = 0) 
+    result = initial
+    array.each do |elem|
+      result = yield result, elem
+    end
+     result
+  end
 end

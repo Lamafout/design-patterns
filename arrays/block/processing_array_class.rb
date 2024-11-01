@@ -10,10 +10,15 @@ class Processing_array
   end
 
   def count_of_elems_in_range(range)
-    array.count { |elem| range.include?(elem) }
+    array.count { |elem| elem > range.begin && elem < range.end }
   end
 
   def count_of_elems_between_mins
     array.rindex(array.min) - array.index(array.min) - 1
   end
+
+  def count_of_elems_in_segment(segment)
+    array.count { |elem| segment.include?(elem) }
+  end
+
 end

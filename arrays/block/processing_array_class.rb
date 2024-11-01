@@ -21,4 +21,8 @@ class Processing_array
     array.count { |elem| segment.include?(elem) }
   end
 
+  def unique_with_array(another_array)
+    new_array = array + another_array
+    new_array.select { |elem| new_array.count(elem) == 1 }
+  end
 end

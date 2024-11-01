@@ -56,4 +56,11 @@ class Array_processor
     end
     result
   end
+
+  def find
+    array.each do |elem|
+      return elem if yield elem
+    end
+    nil
+  end
 end

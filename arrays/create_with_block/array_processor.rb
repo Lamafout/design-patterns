@@ -2,7 +2,7 @@ class Array_processor
   attr_reader :array
 
   def initialize(array)
-    @array = array
+    self.array = array
   end
 
   def all?
@@ -63,4 +63,7 @@ class Array_processor
     end
     nil
   end
+
+  private
+  attr_writer :array
 end

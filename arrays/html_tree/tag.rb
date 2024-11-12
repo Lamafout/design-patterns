@@ -7,12 +7,20 @@ class Tag
     self.children = children
   end
 
+  def add_child(child)
+    children << child
+  end
+
   def to_s
-    "<#{name} #{attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')}>#{children.join}</#{name}>"
+    if ['img', 'input'].include?(self.name) # пока что ограниченное количество тегов
+      "<#{name} #{attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')} />"
+    else
+      "<#{name} #{attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')}>#{children.join}</#{name}>"
+    end
   end
 
   def self.parse_name(string)
-    name = string[1..-2]
+    name = string[1..-2]                   
   end
 
   def self.parse_attrs(string)

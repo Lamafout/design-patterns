@@ -7,7 +7,9 @@ class Iterator include Enumerable
 
   def each
     enumerator = self.enumerator
-    enumerator.each {|element| yield element}
+    enumerator.each do |element| 
+      yield element
+    end
   end
 
   private

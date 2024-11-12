@@ -1,10 +1,11 @@
 class Tag
-  attr_accessor :name, :attrs, :children
+  attr_accessor :name, :attrs, :children, :content
 
-  def initialize(name = nil, attrs = {}, children = [])
+  def initialize(name: nil, attrs: {}, children: [], content: '')
     self.name = name
     self.attrs = attrs
     self.children = children
+    self.content = content
   end
 
   def add_child(child)
@@ -13,14 +14,14 @@ class Tag
 
   def to_s
     if ['img', 'input'].include?(self.name) # пока что ограниченное количество тегов
-      "<#{name} #{attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')} />"
+      "<#{self.name} #{self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')} />"
     else
-      "<#{name} #{attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')}>#{children.join}</#{name}>"
+      "<#{self.name} #{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
     end
   end
 
   def self.parse_name(string)
-    name = string[1..-2]                   
+    string[1..-2].split.first                   
   end
 
   def self.parse_attrs(string)
@@ -29,5 +30,13 @@ class Tag
       attrs[key] = value
     end
     attrs
+  end
+
+  def count_of_children
+    children.length
+  end
+
+  def has_atrributes?
+    attrs.any?
   end
 end

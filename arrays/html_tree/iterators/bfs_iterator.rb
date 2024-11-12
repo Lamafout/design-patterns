@@ -1,6 +1,6 @@
 require_relative "./iterator.rb"
 
-class Bfs_iterator << Iterator
+class BFS_iterator < Iterator
   def enumerator
     Enumerator.new do |yielder|
       enum_queue = [self.root]
@@ -8,5 +8,7 @@ class Bfs_iterator << Iterator
         element = enum_queue.shift
         yielder << element
         enum_queue.concat element.children if element.children
+      end
+    end
   end
 end

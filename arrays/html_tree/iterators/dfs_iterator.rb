@@ -1,6 +1,6 @@
 require_relative "./iterator.rb"
 
-class Dfs_iterator << Iterator
+class DFS_iterator < Iterator
   def enumerator
     Enumerator.new do |yielder|
       enum_stack = [self.root]
@@ -8,5 +8,7 @@ class Dfs_iterator << Iterator
         element = enum_stack.pop
         yielder << element
         enum_stack.concat element.children.reverse if element.children
+      end
+    end
   end
 end

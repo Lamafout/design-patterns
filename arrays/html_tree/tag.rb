@@ -11,13 +11,21 @@ class Tag
   def add_child(child)
     children << child
   end
+  
+  def opening
+    "<#{self.name} #{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
+  end
 
-  def to_s
-    if ['img', 'input'].include?(self.name) # пока что ограниченное количество тегов
+  def closing
+    "#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
+  end
+
+  def single
       "<#{self.name} #{self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')} />"
-    else
-      "<#{self.name} #{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
-    end
+  end
+
+  def single?
+    ['img', 'input'].include?(self.name)
   end
 
   def self.parse_name(string)

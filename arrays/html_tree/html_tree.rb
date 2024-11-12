@@ -17,7 +17,7 @@ class HTML_tree
   def dfs
     DFS_iterator.new(self.root)
   end
-  
+
   private
   attr_writer :root
   

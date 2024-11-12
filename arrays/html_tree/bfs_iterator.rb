@@ -1,4 +1,5 @@
 require_relative "./iterator.rb"
+
 class Bfs_iterator << Iterator
   def enumerator
     Enumerator.new do |yielder|

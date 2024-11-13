@@ -1,10 +1,20 @@
 require_relative 'person_class.rb'
 
 class Student < Person
-  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+  attr_reader :surname, :name, :second_name, :birthdate
+  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: birthdate)
     set_fullname(surname: surname, name: name, second_name: second_name)
+    self.burthdate = birthdate
     super(id: id, git: git)
     set_contacts(phone: phone, telegram: telegram, email: email)
+  end
+
+  def <=>(other)
+    if other.is_a?(Student)
+      self.birthdate <=> other.birthdate
+    else
+      raise ArgumentError, "Can't compare #{self.class} with #{other.class}"
+    end
   end
 
   def get_info
@@ -33,6 +43,10 @@ class Student < Person
     else 
       raise ArgumentError, "Invalid second_name"
     end
+  end
+
+  def birhdate=(birthdate)
+    @birthdate = birthdate.is_a?(Date) ? birthdate : Date.parse(birthdate)
   end
 
   def contact

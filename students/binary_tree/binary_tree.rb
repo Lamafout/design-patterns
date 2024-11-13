@@ -1,4 +1,5 @@
 require_relative 'node.rb'
+require_relative '../entities/student_class.rb'
 
 class Binary_tree include Enumerable
   attr_accessor :root
@@ -8,11 +9,17 @@ class Binary_tree include Enumerable
   end
 
   def add(value)
-    new_node = Node.new(value: value)
+    puts value.birthdate
+    new_node = value.is_a?(Student) ? Node.new(value: value) : nil
+
+    if new_node.nil?
+      raise ArgumentError, 'Invalid argument'
+    end
+
     if self.root.nil?
       self.root = new_node
     else
-      self.root.insert(self.root, new_node)
+      insert(self.root, new_node)
     end
   end
 
@@ -23,9 +30,11 @@ class Binary_tree include Enumerable
 
     if node.value < root.value
       insert(root.left, node)
+      root.left = node
       root.left.parent = root
     else 
       insert(root.right, node)
+      root.right = node
       root.right.parent = root
     end
   end

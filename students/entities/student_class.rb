@@ -1,10 +1,13 @@
 require_relative 'person_class.rb'
+require 'date'
 
-class Student < Person
+class Student < Person 
+  include Comparable
   attr_reader :surname, :name, :second_name, :birthdate
-  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: birthdate)
+
+  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
     set_fullname(surname: surname, name: name, second_name: second_name)
-    self.burthdate = birthdate
+    self.birthdate = birthdate
     super(id: id, git: git)
     set_contacts(phone: phone, telegram: telegram, email: email)
   end
@@ -45,8 +48,14 @@ class Student < Person
     end
   end
 
-  def birhdate=(birthdate)
-    @birthdate = birthdate.is_a?(Date) ? birthdate : Date.parse(birthdate)
+  def birthdate=(birthdate)
+    if birthdate.is_a?(Date)
+      @birthdate = birthdate
+    elsif birthdate.is_a?(String) 
+       @birthdate = Date.parse(birthdate)
+    else
+      raise ArgumentError, "Invalid birthdate"
+    end
   end
 
   def contact

@@ -1,7 +1,7 @@
-require_relative 'entities/student_class'
-require_relative 'entities/short_student_class'
-require_relative 'binary_tree/binary_tree.rb'
-require_relative 'data/data_list_student_short.rb'
+require_relative 'domain/entities/student_class'
+require_relative 'domain/entities/short_student_class'
+require_relative 'core/binary_tree/binary_tree.rb'
+require_relative 'data/model/data_list_student_short.rb'
 
 amal = Student.new('Blyagoz', 'Amal', 'Khazretovich', id: 123, git: 'github.com/lamafout', email: 'lamafout@yandex.ru', telegram: '@lamafout', birthdate: Date.new(2004, 6, 14))
 # sergey = Student.new('Lotarev', 'Sergey', 'Urievuch', phone: '88005553535', birthdate: Date.new(2004, 10, 26))

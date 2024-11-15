@@ -12,6 +12,10 @@ class Data_list
     self.selected_indexes << index
   end
 
+  def clear_selected
+    self.selected_indexes = []
+  end
+
   def get_names
     raise NotImplementedError, "Must be implemented!"
   end
@@ -27,7 +31,7 @@ class Data_list
     result_table = Data_table.new(result_data)
   end
 
-  def list(list)
+  def list=(list)
     if list.is_a?(Array) && list.length == get_names.length + 1
       self.list = list
     else
@@ -37,7 +41,7 @@ class Data_list
   
   private
   attr_accessor :selected_indexes, :index
-  attr_reader: list
+  attr_reader :list
 
   def row_from_attrs(data) # part of the code that must be implemented in children classes
     raise NotImplementedError, "Must be implemented!"

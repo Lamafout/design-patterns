@@ -1,3 +1,5 @@
+require_relative 'data_table.rb'
+
 class Data_table
 
   def initialize(data)

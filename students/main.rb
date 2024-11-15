@@ -16,3 +16,7 @@ tree = Binary_tree.new
 tree.add(amal)
 tree.add(sergey)
 tree.add(mark)
+
+tree.iterator.each do |node|
+  puts node.name 
+end

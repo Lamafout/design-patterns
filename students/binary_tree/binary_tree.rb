@@ -1,5 +1,6 @@
 require_relative 'node.rb'
 require_relative '../entities/student_class.rb'
+require_relative 'iterators/binary_iterator.rb'
 
 class Binary_tree include Enumerable
   attr_accessor :root
@@ -9,7 +10,6 @@ class Binary_tree include Enumerable
   end
 
   def add(value)
-    puts value.birthdate
     new_node = value.is_a?(Student) ? Node.new(value: value) : nil
 
     if new_node.nil?
@@ -21,6 +21,10 @@ class Binary_tree include Enumerable
     else
       insert(self.root, new_node)
     end
+  end
+
+  def iterator 
+    Binary_iterator.new(self.root)
   end
 
   private

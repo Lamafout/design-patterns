@@ -7,5 +7,5 @@ class Node
     self.right = right
     self.parent = parent
   end
-  
+
 end

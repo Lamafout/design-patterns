@@ -4,7 +4,8 @@ class Data_list
   end
 
   def select(index)
-    self.selected_elems = list[index]
+    raise "Index out of range" if index < 0 || index >= list.length
+    self.selected_indexes << index
   end
 
   def get_names

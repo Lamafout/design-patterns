@@ -42,16 +42,17 @@ class HTML_tree
   # methods for checking type of the element
   
   def opening_element?(element)
-    element[0] == '<' && (element[1].nil? ? false : element[-2]) != '/'
-  end
+    element.start_with?('<') && !element.start_with?('</') && !element.end_with?('/>')
+  end  
   
   def closing_element?(element)
-    element[0] == '<' && (element[1].nil? ? false : element[1]) == '/'
-  end
+    element.start_with?('</')
+  end  
   
   def single_element?(element)
-    element[0] == '<' && (element[1].nil? ? false : element[-2]) == '/'
+    element.start_with?('<') && element.end_with?('/>')
   end
+  
 
   # methods for processing elements
   

@@ -11,21 +11,29 @@ class Tag
   def add_child(child)
     children << child
   end
+
+  def to_s
+    if single?
+      return single
+    else 
+      return opening
+    end
+  end
   
   def opening
-    "<#{self.name} #{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
+    "<#{self.name}#{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{has_content? ? self.content : ''}"
   end
 
   def closing
-    "#{self.children.map(&:to_s).join}#{self.content}</#{self.name}>"
+    "<#{self.name}>"
   end
 
   def single
-      "<#{self.name} #{self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')} />"
+    "<#{self.name} #{self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ')}/>"
   end
 
-  def single?
-    ['img', 'input'].include?(self.name)
+  def count_of_children
+    children.length
   end
 
   def self.parse_name(string)
@@ -40,11 +48,18 @@ class Tag
     attrs
   end
 
-  def count_of_children
-    children.length
+  private
+
+  def single?
+    ['img', 'form'].include?(self.name)
   end
 
   def has_atrributes?
-    attrs.any?
+    self.attrs.any?
   end
+
+  def has_content?
+    self.content.length > 0
+  end
+  
 end

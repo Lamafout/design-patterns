@@ -103,6 +103,20 @@ class Student < Person
     "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, #{"Phone: #{@phone}, " if !@phone.nil?}#{"Telegram: #{@telegram}, " if !@telegram.nil?}#{"Email: #{@email}, " if !@email.nil?} #{"Git: #{@git}, " if !@git.nil?}"
   end
 
+  def to_h
+    {
+      'id' => self.id,
+      'surname' => self.surname,
+      'name' => self.name,
+      'second_name' => self.second_name,
+      'birthdate' => self.birthdate,
+      'phone' => self.phone,
+      'telegram' => self.telegram,
+      'email' => self.email,
+      'git' => self.git
+    }
+  end
+
   #приватные методы-писатели для контактов
   private
   def phone=(new_phone)

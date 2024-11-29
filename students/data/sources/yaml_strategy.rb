@@ -1,9 +1,13 @@
 require 'yaml'
 require_relative '../../domain/entities/short_student_class.rb'
 require_relative '../../domain/entities/student_class.rb'
-require_relative 'student_list_source.rb'
+require_relative 'source_strategy.rb'
 
-class Student_list_YAML < Student_list_source
+class YAML_strategy < Source_strategy
+
+  def initialize(path)
+    self.path = path
+  end
 
   def read_list_of_students
     file = File.read(self.path)

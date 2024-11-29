@@ -32,8 +32,8 @@ class Data_list
   end
 
   def list=(list)
-    if list.is_a?(Array) && list.length == get_names.length + 1
-      self.list = list
+    if correct_type?(list)
+      @list = list
     else
       raise ArgumentError, "Wrong list format"
     end
@@ -45,5 +45,17 @@ class Data_list
 
   def row_from_attrs(data) # part of the code that must be implemented in children classes
     raise NotImplementedError, "Must be implemented!"
+  end
+
+  def correct_type?(var)
+    if var.is_a?(Array)
+      var.all?{ |item| item.is_a?(element_type) }
+    else
+      false
+    end
+  end
+
+  def element_type
+    Object
   end
 end

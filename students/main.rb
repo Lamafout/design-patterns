@@ -47,8 +47,8 @@ end
 
 slyaml = Student_list_YAML.new('res/data/students_list.yaml') 
 
-slyaml.insert_student(sergey)
+# slyaml.insert_student(sergey)
 
-slyaml.read_list_of_students.each do |student|
-  puts student
-end
+temp = slyaml.get_k_n_student_short_list(1, 3)
+temp.select(1)
+puts temp.get_data.count_of_rows

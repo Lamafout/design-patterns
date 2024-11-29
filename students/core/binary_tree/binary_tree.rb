@@ -1,5 +1,5 @@
 require_relative 'node.rb'
-require_relative '../entities/student_class.rb'
+require_relative '../../domain/entities/student_class.rb'
 require_relative 'iterators/binary_iterator.rb'
 
 class Binary_tree include Enumerable

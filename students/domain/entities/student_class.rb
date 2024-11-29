@@ -5,7 +5,7 @@ class Student < Person
   include Comparable
   attr_reader :surname, :name, :second_name, :birthdate
 
-  def initialize(surname, name, second_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
+  def initialize(surname:, name:, second_name:, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
     set_fullname(surname: surname, name: name, second_name: second_name)
     self.birthdate = birthdate
     super(id: id, git: git)
@@ -18,6 +18,11 @@ class Student < Person
     else
       raise ArgumentError, "Can't compare #{self.class} with #{other.class}"
     end
+  end
+
+  def to_h
+    { id: self.id, surname: self.surname, name: self.name, second_name: self.second_name, 
+    birthdate: self.birthdate, telegram: self.telegram, email: self.email, phone: self.phone, git: self.git }
   end
 
   def get_info
@@ -98,7 +103,7 @@ class Student < Person
     telegram.match?(/@[a-zA-Z0-9_]{5,}$/)
   end
   
-  #переопределение to_s для простого поулчения информации об экземпляре
+  #переопределение to_s для простого получения информации об экземпляре
   def to_s
     "ID: #{@id}, Surname: #{@surname}, Name: #{@name}, Second Name: #{@second_name}, #{"Phone: #{@phone}, " if !@phone.nil?}#{"Telegram: #{@telegram}, " if !@telegram.nil?}#{"Email: #{@email}, " if !@email.nil?} #{"Git: #{@git}, " if !@git.nil?}"
   end
@@ -119,6 +124,7 @@ class Student < Person
 
   #приватные методы-писатели для контактов
   private
+  attr_reader :phone, :email, :telegram
   def phone=(new_phone)
     if new_phone.nil? || self.class.is_phone_valid?(new_phone)
       @phone = new_phone

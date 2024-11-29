@@ -1,0 +1,19 @@
+---
+- id: 1
+  surname: Blyagoz
+  name: Amal
+  second_name: Khazretovich
+  birthdate: 2004-06-14
+  phone: 
+  telegram: "@lamafout"
+  email: lamafout@yandex.ru
+  git: github.com/lamafout
+- id: 
+  surname: Lotarev
+  name: Sergey
+  second_name: Urievuch
+  birthdate: 2004-10-26
+  phone: '88005553535'
+  telegram: 
+  email: 
+  git: 

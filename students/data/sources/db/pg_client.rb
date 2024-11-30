@@ -11,6 +11,10 @@ class PG_client
     )
   end
 
+  def exec(query)
+    client.exec(query)
+  end
+
   private
   attr_accessor :client
 end

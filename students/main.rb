@@ -56,3 +56,7 @@ short_amal = Short_student.from_string(id: amal.id, string: amal.get_info)
 # puts temp.get_data.count_of_rows
 
 client = PG_client.new
+
+client.exec("select * from students;").each do |row|
+  puts row
+end

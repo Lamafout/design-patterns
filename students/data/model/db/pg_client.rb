@@ -9,6 +9,10 @@ class PG_client
     client.exec_params(query, params)
   end
 
+  def close
+    client.close
+  end
+
   def self.instance
     if @instance.nil?
       new

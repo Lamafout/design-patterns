@@ -6,7 +6,7 @@ class Student_list_DB
   attr_accessor :client 
 
   def initialize
-    self.client = PG_client.new
+    self.client = PG_client.instance
   end
 
   def get_by_id(id)
@@ -35,7 +35,7 @@ class Student_list_DB
 
     Data_list_student_short.new(student_short_list)
   end
-  
+
   def insert_student(student)
     client.exec_params(
       "INSERT INTO students (surname, name, second_name, birthdate, phone, telegram, email, git) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",

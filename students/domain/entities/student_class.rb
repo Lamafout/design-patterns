@@ -25,6 +25,10 @@ class Student < Person
     birthdate: self.birthdate, telegram: self.telegram, email: self.email, phone: self.phone, git: self.git }
   end
 
+  def self.from_hash(hash)
+    self.new(**hash.transform_keys(&:to_sym))
+  end
+
   def get_info
     "#{initials}, #{git()}, #{contact}"
   end

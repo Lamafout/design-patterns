@@ -110,4 +110,5 @@ class Student_list_context
       end
     end
     true
+  end
 end

@@ -13,7 +13,7 @@ class Student_list_DB
     result = client.exec_params("SELECT * FROM students WHERE id = $1", [id])
     raise "Student with id=#{id} not found" if result.ntuples.zero?
 
-    result[0] 
+    Student.from_hash(result[0]) 
   end
 
   def get_k_n_student_short_list(k = 1, n = 20)
@@ -35,12 +35,7 @@ class Student_list_DB
 
     Data_list_student_short.new(student_short_list)
   end
-
-  def sort(field = 'surname')
-    result = client.exec("SELECT * FROM students ORDER BY #{field}")
-    result.map { |row| row } 
-  end
-
+  
   def insert_student(student)
     client.exec_params(
       "INSERT INTO students (surname, name, second_name, birthdate, phone, telegram, email, git) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",

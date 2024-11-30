@@ -4,6 +4,7 @@ require 'date'
 class Student < Person 
   include Comparable
   attr_reader :surname, :name, :second_name, :birthdate
+  attr_reader :phone, :email, :telegram
 
   def initialize(surname:, name:, second_name:, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
     set_fullname(surname: surname, name: name, second_name: second_name)
@@ -128,7 +129,6 @@ class Student < Person
 
   #приватные методы-писатели для контактов
   private
-  attr_reader :phone, :email, :telegram
   def phone=(new_phone)
     if new_phone.nil? || self.class.is_phone_valid?(new_phone)
       @phone = new_phone

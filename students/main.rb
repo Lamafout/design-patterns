@@ -68,3 +68,5 @@ sldb.client.exec("select * from students").each do |row|
 end
 
 puts sldb.get_student_short_count
+
+sldb.insert_student(mark)

@@ -3,10 +3,10 @@ require 'date'
 
 class Student < Person 
   include Comparable
-  attr_reader :surname, :name, :second_name, :birthdate
-  attr_reader :phone, :email, :telegram
+  attr_reader :surname, :name, :second_name, :birthdate, :phone, :email, :telegram
+  attr_accessor :unique_indicator
 
-  def initialize(surname:, name:, second_name:, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
+  def initialize(surname:, name:, second_name:, id: nil, phone: nil, telegram: nil, email: nil, git: nil, birthdate: nil, unique_indicator: :git)
     set_fullname(surname: surname, name: name, second_name: second_name)
     self.birthdate = birthdate
     super(id: id, git: git)

@@ -36,13 +36,11 @@ class Student_list_DB
     Data_list_student_short.new(student_short_list)
   end
 
-  # Сортировка студентов по указанному полю
   def sort(field = 'surname')
     result = client.exec("SELECT * FROM students ORDER BY #{field}")
-    result.map { |row| row } # Возвращаем массив хэшей
+    result.map { |row| row } 
   end
 
-  # Вставка нового студента
   def insert_student(student)
     client.exec_params(
       "INSERT INTO students (surname, name, second_name, birthdate, phone, telegram, email, git) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
@@ -59,7 +57,6 @@ class Student_list_DB
     )
   end
 
-  # Замена студента по ID
   def replace_by_id(student)
     client.exec_params(
       "UPDATE students SET surname = $1, name = $2, second_name = $3, birthdate = $4, phone = $5, telegram = $6, email = $7, git = $8 WHERE id = $9",
@@ -77,12 +74,10 @@ class Student_list_DB
     )
   end
 
-  # Удаление студента по ID
   def delete_by_id(id)
     client.exec_params("DELETE FROM students WHERE id = $1", [id])
   end
 
-  # Получить общее количество записей в таблице студентов
   def get_student_short_count
     result = client.exec("SELECT COUNT(*) FROM students")
     result[0]['count'].to_i

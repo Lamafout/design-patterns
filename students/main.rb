@@ -4,6 +4,7 @@ require_relative 'data/model/data_list_student_short.rb'
 require_relative 'data/sources/json_strategy.rb'
 require_relative 'data/sources/yaml_strategy.rb'
 require_relative 'data/sources/student_list_context.rb'
+require_relative 'data/sources/db/pg_client.rb'
 
 amal = Student.new(surname: 'Blyagoz', name: 'Amal', second_name: 'Khazretovich', git: 'github.com/lamafout', email: 'lamafout@yandex.ru', telegram: '@lamafout', birthdate: Date.new(2004, 6, 14))
 sergey = Student.new(surname: 'Lotarev', name: 'Sergey', second_name: 'Urievuch', phone: '88005553535', birthdate: Date.new(2004, 10, 26))
@@ -46,10 +47,12 @@ short_amal = Short_student.from_string(id: amal.id, string: amal.get_info)
 #   puts element
 # end
 
-sl = Student_list_context.new 
-sl.strategy = YAML_strategy.new('res/data/students_list.yaml')
-sl.insert_student(sergey)
+# sl = Student_list_context.new 
+# sl.strategy = YAML_strategy.new('res/data/students_list.yaml')
+# sl.insert_student(sergey)
 
-temp = sl.get_k_n_student_short_list(1, 3)
-temp.select(1)
-puts temp.get_data.count_of_rows
+# temp = sl.get_k_n_student_short_list(1, 3)
+# temp.select(1)
+# puts temp.get_data.count_of_rows
+
+client = PG_client.new

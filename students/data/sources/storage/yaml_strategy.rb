@@ -1,6 +1,6 @@
 require 'yaml'
-require_relative '../../domain/entities/short_student_class.rb'
-require_relative '../../domain/entities/student_class.rb'
+require_relative '../../../domain/entities/short_student_class.rb'
+require_relative '../../../domain/entities/student_class.rb'
 require_relative 'source_strategy.rb'
 
 class YAML_strategy < Source_strategy

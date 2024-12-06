@@ -1,6 +1,6 @@
-require_relative '../model/db/pg_client.rb'
-require_relative '../../domain/entities/student_class.rb'
-require_relative '../../domain/entities/short_student_class.rb'
+require_relative '../../model/db/pg_client.rb'
+require_relative '../../../domain/entities/student_class.rb'
+require_relative '../../../domain/entities/short_student_class.rb'
 
 class Student_list_DB
   attr_accessor :client 

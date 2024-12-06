@@ -1,11 +1,10 @@
-require_relative '../model/data_list_student_short.rb'
+require_relative '../../model/data_list_student_short.rb'
 require_relative 'source_strategy.rb'
 
-class Student_list_context
-  attr_reader :strategy
+class Student_list_storage
 
-  def initialize
-    self.strategy = Source_strategy.new
+  def initialize(strategy)
+    self.strategy = strategy
   end
 
   def strategy=(strategy)
@@ -14,6 +13,14 @@ class Student_list_context
     else 
       raise TypeError, 'Wrong type of strategy'
     end
+  end
+
+  def read_list_of_students
+    self.strategy.read_list_of_students
+  end
+
+  def write_list_of_students
+    self.strategy.write_list_of_students
   end
 
   def get_by_id(id)

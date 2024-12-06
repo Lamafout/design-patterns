@@ -2,6 +2,7 @@ require_relative '../student_list_interface.rb'
 require_relative '../../model/data_list_student_short.rb'
 require_relative 'source_strategy.rb'
 class Student_list_storage_adapter < Student_list_interface
+  attr_accessor :strategy
   def initialize(strategy)
     self.strategy = strategy
   end
@@ -28,12 +29,13 @@ class Student_list_storage_adapter < Student_list_interface
     end
   end
 
-  def get_k_n_student_short_list(k = 1, n = 20)
+  def get_k_n_student_short_list(k = 1, n = 20, filter=nil)
     k = 1 if k < 1 
     student_list = self.strategy.read_list_of_students
 
     if student_list[k * n]
-      student_short_list = student_list[((k-1) * n)...(k*n)].map do |student|
+      filtered_list = filter.nil? ? student_list : filter.apply(student_list)
+      student_short_list = filtered_list[((k-1) * n)...(k*n)].map do |student|
         Short_student.from_student(student)
       end
       Data_list_student_short.new(student_short_list)
@@ -76,10 +78,11 @@ class Student_list_storage_adapter < Student_list_interface
     self.strategy.write_list_of_students(student_list)
   end
   
-  def get_student_short_count
+  def get_student_short_count(filter = nil)
     students_list = self.strategy.read_list_of_students
+    filtered_list = filter.nil? ? students_list : filter.apply(student_list)
 
-    students_list.count
+    filtered_list.count
   end
 
   private

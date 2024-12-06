@@ -31,7 +31,7 @@ class Student_list_interface
     raise NotImplementedError, "You must implement this method"
   end
   
-  def get_student_short_count
+  def get_student_short_count(filter)
     raise NotImplementedError, "You must implement this method"
   end
 end

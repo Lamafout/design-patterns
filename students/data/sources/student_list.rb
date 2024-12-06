@@ -1,5 +1,7 @@
 require_relative 'student_list_interface'
 class Student_list < Student_list_interface
+  attr_accessor :adapter
+
   def initialize(adapter)
     self.adapter = adapter
   end
@@ -36,7 +38,7 @@ class Student_list < Student_list_interface
     self.adapter.delete_by_id(id)
   end
   
-  def get_student_short_count
+  def get_student_short_count(filter)
     self.adapter.get_student_short_count
   end
 

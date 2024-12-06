@@ -1,5 +1,4 @@
 require_relative '../student_list_interface'
-require_relative './student_list_db'
 require_relative '../../model/db/pg_client.rb'
 require_relative '../../../domain/entities/student_class.rb'
 require_relative '../../../domain/entities/short_student_class.rb'
@@ -18,12 +17,15 @@ class Student_list_db_adapter < Student_list_interface
     Student.from_hash(result[0]) 
   end
 
-  def get_k_n_student_short_list(k = 1, n = 20)
+  def get_k_n_student_short_list(k = 1, n = 20, fiter=nil)
     k = 1 if k < 1
     offset = (k - 1) * n
 
+    query = "SELECT id, surname, name, second_name FROM students "
+    filtered_query = filter.nil? ? query : query + ' WHERE ' + filter.apply(query)
+
     result = client.exec_params(
-      "SELECT id, surname, name, second_name FROM students ORDER BY id LIMIT $1 OFFSET $2",
+      "#{filtered_query} ORDER BY id LIMIT $1 OFFSET $2",
       [n, offset]
     )
 
@@ -75,8 +77,11 @@ class Student_list_db_adapter < Student_list_interface
     client.exec_params("DELETE FROM students WHERE id = $1", [id])
   end
 
-  def get_student_short_count
-    result = client.exec("SELECT COUNT(*) FROM students")
+  def get_student_short_count(filter=nil)
+    query = "SELECT COUNT(*) FROM students"
+    filtered_query = filter.nil? ? query : query + ' WHERE ' + filter.apply(query)
+    puts filtered_query
+    result = client.exec(filtered_query)
     result[0]['count'].to_i
   end
 end

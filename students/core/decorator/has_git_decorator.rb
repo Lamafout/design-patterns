@@ -2,6 +2,7 @@ require_relative 'decorator'
 
 class Has_git_decorator < Decorator
   def initialize(filter)
+    puts 'hhh'
     super(filter)
   end
 

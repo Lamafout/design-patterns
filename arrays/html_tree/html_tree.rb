@@ -8,6 +8,7 @@ class HTML_tree
   def initialize(html)
     self.root = self.fromHTML(html)
   end
+
   # iterators
   
   def bfs
@@ -20,7 +21,7 @@ class HTML_tree
 
   private
   attr_writer :root
-  
+
   def fromHTML(html)
     tag_stack = [] 
     html.scan(/<[^>]+>|[^<]+/) do |element| 
@@ -40,7 +41,7 @@ class HTML_tree
   end
 
   # methods for checking type of the element
-  
+
   def opening_element?(element)
     element.start_with?('<') && !element.start_with?('</') && !element.end_with?('/>')
   end  
@@ -52,7 +53,6 @@ class HTML_tree
   def single_element?(element)
     element.start_with?('<') && element.end_with?('/>')
   end
-  
 
   # methods for processing elements
   

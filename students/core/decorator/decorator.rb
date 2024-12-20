@@ -2,6 +2,7 @@ require_relative './filter'
 
 class Decorator < Filter
   def initialize(filter)
+    puts "pppp"
     self.filter = filter
   end
 

@@ -29,9 +29,11 @@ short_amal = Short_student.from_string(id: amal.id, string: amal.get_info)
 # tree.iterator.each do |node|
 #   puts node.name 
 # end
+# 
 
+filter = Has_git_decorator.new(Filter.new)
 list = Student_list.new(Student_list_storage_adapter.new(JSON_strategy.new('./res/data/sudents_list.json')))
-
-filtered_list_count = list.get_student_short_count(Has_contact_decorator.new(Has_git_decorator.new(Filter.new)))
+puts filter.nil?
+filtered_list_count = list.get_student_short_count(filter)
 
 puts filtered_list_count

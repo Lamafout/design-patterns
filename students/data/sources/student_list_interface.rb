@@ -1,12 +1,4 @@
 class Student_list_interface
-  def read_list_of_students
-    raise NotImplementedError, "You must implement this method"
-  end
-
-  def write_list_of_students
-    raise NotImplementedError, "You must implement this method"
-  end
-
   def get_by_id(id)
     raise NotImplementedError, "You must implement this method"
   end

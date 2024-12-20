@@ -21,7 +21,7 @@ class Tag
   end
   
   def opening
-    "<#{self.name}#{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{has_content? ? self.content : ''}"
+    "<#{self.name} #{has_atrributes? ? self.attrs.map{|k,v| "#{k}=\"#{v}\""}.join(' ') : ''}>#{has_content? ? self.content : ''}"
   end
 
   def closing
@@ -48,7 +48,7 @@ class Tag
     attrs
   end
 
-  private
+  
 
   def single?
     ['img', 'form'].include?(self.name)

@@ -5,6 +5,7 @@ class Data_list
     self.list = list
     self.selected_indexes = []
     self.index = 0
+    self.observers = []
   end
 
   def select(index)
@@ -37,6 +38,16 @@ class Data_list
       @list = list
     else
       raise ArgumentError, "Wrong list format"
+    end
+  end
+
+  def add_observer(observer)
+    self.observers << observer
+  end
+
+  def notify
+    self.observers.each do |observer|
+      observer.update(self.get_data)
     end
   end
   

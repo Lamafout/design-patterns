@@ -9,7 +9,7 @@ include Fox
 
 class StudentListView < FXMainWindow
   def initialize(app, students_list)
-      super(app, "Student List", width: 1280, height: 720)
+      super(app, "Student List", width: 980, height: 720)
       self.filters = {}
       self.students_list = students_list
       self.current_page = 1
@@ -82,13 +82,23 @@ class StudentListView < FXMainWindow
   def setup_table_area(parent)
     parent.backColor = FXRGB(255, 255, 255)
     # Setup table
-    self.table = FXTable.new(parent, opts: LAYOUT_FILL_X | LAYOUT_FILL_Y | TABLE_READONLY | TABLE_COL_SIZABLE)
-    self.table.setTableSize(self.items_per_page, 3)
-    self.table.defColumnWidth = 180
-    self.table.rowHeaderWidth = 30
-    self.table.columnHeader.connect(SEL_COMMAND) do |_, _, col|
-        sort_table_by_column(col)
-        update_table
+    self.table = FXTable.new(parent, opts: LAYOUT_FILL_X | LAYOUT_FILL_Y | TABLE_READONLY)
+    self.table.setTableSize(self.items_per_page, 4)
+    self.table.setColumnWidth(0, 30)
+    self.table.setColumnWidth(1, 100)
+    self.table.setColumnWidth(2, 200)
+    self.table.setColumnWidth(3, 200)
+    self.table.rowHeaderWidth = 0
+    self.table.columnHeaderHeight = 0
+
+    self.table.connect(SEL_COMMAND) do |_, _, pos|
+        if pos.row == 0
+            sort_table_by_column(pos.col)
+        end
+
+        if pos.col == 0
+            self.table.selectRow(pos.row)
+        end
     end
 
     # Setup navigation
@@ -108,7 +118,7 @@ class StudentListView < FXMainWindow
         app.addTimeout(100) do
           button.backColor = FXRGB(100, 100, 255)
         end
-        change_page(1)
+        change_page(-1)
       end
     end
     self.next_button.tap do |button|
@@ -251,6 +261,15 @@ class StudentListView < FXMainWindow
   def create
       super
       show(PLACEMENT_SCREEN)
+  end
+
+  def update(input_data_table)
+    clear_table
+    (0...input_data_table.row_count).each do |row|
+        (0...input_data_table.column_count).each do |col|
+            self.table.setItemText(row, col, input_data_table.get_element(row, col).to_s)
+        end
+    end
   end
 
   private

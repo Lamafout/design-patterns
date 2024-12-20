@@ -38,7 +38,11 @@ class Students_list_storage
       student_short_list = filtered_list[((k-1) * n)...(k*n)].map do |student|
         Short_student.from_student(student)
       end
-      Data_list_student_short.new(student_short_list)
+      result_data_list = Data_list_student_short.new(student_short_list)
+      student_short_list.each_with_index do |_, index|
+        result_data_list.select(index)
+      end
+      result_data_list
     else
       raise IndexError, 'Index out of range'
     end

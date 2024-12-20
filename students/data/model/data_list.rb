@@ -25,6 +25,7 @@ class Data_list
     self.selected_indexes.each do |index|
       data = self.list[index]
       new_row = [self.index].concat(row_from_attrs(data))
+      puts new_row
       result_data << new_row 
       self.index += 1
     end

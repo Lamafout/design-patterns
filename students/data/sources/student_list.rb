@@ -38,7 +38,7 @@ class Student_list < Student_list_interface
     self.adapter.delete_by_id(id)
   end
   
-  def get_student_short_count(filter)
+  def get_student_short_count(filter = nil)
     self.adapter.get_student_short_count
   end
 

@@ -9,7 +9,7 @@ include Fox
 
 class StudentListView < FXMainWindow
   def initialize(app, students_list)
-      super(app, "Student List", width: 1080, height: 505)
+      super(app, "Student List", width: 1280, height: 720)
       self.filters = {}
       self.students_list = students_list
       self.current_page = 1
@@ -187,35 +187,35 @@ class StudentListView < FXMainWindow
   end
 
   def update_table
-      return if self.data.nil? || self.data.count_of_rows <= 1
-      total_pages = (self.data.count_of_rows.to_f / self.items_per_page).ceil
-      self.page_label.text = "Страница #{self.current_page} из #{total_pages}"
-    
-      # Calculate start and end indexes. 
-      # End index is minimal index in start + count of display rows and tota count of rows
-      start_index = (self.current_page - 1) * self.items_per_page
-      end_index = [start_idx + self.items_per_page - 1, self.data.count_of_rows - 1].min
-    
-      # Create array of display rows
-      rows_to_display = (start_index..end_index).map do |row_idx|
-          (0...self.data.count_of_columns).map do |col_idx|
-              self.data.get_by_index(row_idx, col_idx)
-          end
+    return if self.data.nil? || self.data.count_of_rows <= 1
+    total_pages = (self.data.count_of_rows.to_f / self.items_per_page).ceil
+    self.page_label.text = "Страница #{self.current_page} из #{total_pages}"
+  
+    # Calculate start and end indexes. 
+    # End index is minimal index in start + count of display rows and tota count of rows
+    start_index = (self.current_page - 1) * self.items_per_page
+    end_index = [start_index + self.items_per_page - 1, self.data.count_of_rows - 1].min
+  
+    # Create array of display rows
+    rows_to_display = (start_index..end_index).map do |row_idx|
+      (0...self.data.count_of_columns).map do |col_idx|
+          self.data.get_by_index(row_idx, col_idx)
       end
-    
-      # Update table
-      row_count = rows_to_display.length
-      column_count = self.data.column_count
-    
-      self.table.setTableSize(row_count, column_count)
-      self.table.setColumnWidth(0, 30)
-    
-      (0...row_count).each do |row_idx|
-          (0...column_count).each do |col_idx|
-              value = rows_to_display[row_idx][col_idx]
-              self.table.setItemText(row_idx, col_idx, value.to_s)
-          end
+    end
+  
+    # Update table
+    row_count = rows_to_display.length
+    column_count = self.data.count_of_columns
+  
+    self.table.setTableSize(row_count, column_count)
+    self.table.setColumnWidth(0, 30)
+  
+    (0...row_count).each do |row_idx|
+      (0...column_count).each do |col_idx|
+          value = rows_to_display[row_idx][col_idx]
+          self.table.setItemText(row_idx, col_idx, value.to_s)
       end
+    end
   end
 
   def change_page(offset)
@@ -228,13 +228,14 @@ class StudentListView < FXMainWindow
 
   def load_data
       self.data = self.students_list.get_k_n_student_short_list(1, self.students_list.get_student_short_count).get_data
+      puts "data: #{self.data.count_of_columns}"
   end
 
   def sort_table_by_column(col_idx=0)
-      return if self.data.nil? || self.data.row_count <= 1
-      headers = (0...self.data.column_count).map {|col_idx| self.data.get_element(0, col_idx)}
-      rows = (1...self.data.row_count).map do |row_idx|
-          (0...self.data.column_count).map {|column_idx| self.data.get_element(row_idx, column_idx)}
+      return if self.data.nil? || self.data.count_of_rows <= 1
+      headers = (0...self.data.count_of_columns).map {|col_idx| self.data.get_by_index(0, col_idx)}
+      rows = (1...self.data.count_of_rows).map do |row_idx|
+          (0...self.data.count_of_columns).map {|column_idx| self.data.get_by_index(row_idx, column_idx)}
       end
       self.sort_order ||= {}
       self.sort_order[col_idx] = !sort_order.fetch(col_idx, false)

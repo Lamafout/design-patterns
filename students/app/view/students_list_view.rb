@@ -50,7 +50,7 @@ class StudentListView < FXMainWindow
       self.table.setItemText(0, index, name)
     end
     self.total_pages = (entities_count / self.items_per_page.to_f).ceil
-    self.page_label = FXLabel.new(self, "Страница #{self.current_page} из #{self.total_pages}")
+    self.page_label.text = "Страница #{self.current_page} из #{self.total_pages}"
   end
 
   def setup_filter_area(parent)

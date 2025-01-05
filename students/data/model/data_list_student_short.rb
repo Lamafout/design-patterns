@@ -3,7 +3,7 @@ require_relative 'data_list.rb'
 class Data_list_student_short < Data_list
 
   def get_names
-    ['initials', 'git', 'contact']
+    ['id', 'initials', 'git', 'contact']
   end
 
   private

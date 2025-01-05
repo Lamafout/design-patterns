@@ -29,7 +29,7 @@ class Students_list_storage
     end
   end
 
-  def get_k_n_student_short_list(k = 1, n = 10, filter=nil)
+  def get_k_n_student_short_list(k = 1, n = 10, data_list = nil, filter = nil)
     k = 1 if k < 1 
     student_list = self.strategy.read_list_of_students
 
@@ -38,10 +38,13 @@ class Students_list_storage
       student_short_list = filtered_list[((k-1) * n)...(k*n)].map do |student|
         Short_student.from_student(student)
       end
+      # создание экземпляра Data_list_student_short и выбор всех прочитаных студентов
       result_data_list = Data_list_student_short.new(student_short_list)
       student_short_list.each_with_index do |_, index|
         result_data_list.select(index)
       end
+
+      result_data_list.observers = data_list.observers
       result_data_list
     else
       raise IndexError, 'Index out of range'

@@ -22,15 +22,14 @@ class Data_list
   end
 
   def get_data
-    result_data = []
-    self.selected_indexes.each do |index|
+    result_data = [get_names]
+    self.list.each_with_index do |row,index|
       data = self.list[index]
       new_row = [self.index].concat(row_from_attrs(data))
-      puts new_row
       result_data << new_row 
       self.index += 1
     end
-    result_table = Data_table.new(result_data)
+    Data_table.new(result_data)
   end
 
   def list=(list)
@@ -50,6 +49,8 @@ class Data_list
       observer.update(self.get_data)
     end
   end
+
+  attr_accessor :observers
   
   private
   attr_accessor :selected_indexes, :index

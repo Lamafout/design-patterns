@@ -10,8 +10,8 @@ class Student_list_storage_adapter < Student_list_interface
     self.storage.get_by_id(id)
   end
 
-  def get_k_n_student_short_list(k = 1, n = 20, filter=nil)
-    get_k_n_student_short_list(k, n, filter)
+  def get_k_n_student_short_list(k = 1, n = 20, data_list = nil, filter = nil)
+    self.storage.get_k_n_student_short_list(k, n, data_list, filter)
   end
 
   def sort

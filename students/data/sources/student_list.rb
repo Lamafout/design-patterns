@@ -18,8 +18,8 @@ class Student_list < Student_list_interface
     self.adapter.get_by_id(id)
   end
 
-  def get_k_n_student_short_list(k = 1, n = 20)
-    self.adapter.get_k_n_student_short_list(k, n)
+  def get_k_n_student_short_list(k = 1, n = 20, data_list = nil, filter = nil)
+    self.adapter.get_k_n_student_short_list(k, n, data_list, filter)
   end
 
   def sort

@@ -12,7 +12,8 @@ class Students_list_controller
 
   def refresh_data
     # Передача дата листа в метод получения страницы нужна для передачи информации о подписчиках на обновления
-    self.data_list = self.students_list.get_k_n_student_short_list(self.view.current_page, self.view.items_per_page - 1, self.data_list)
+    self.data_list = self.students_list.get_k_n_student_short_list(self.view.current_page, self.view.items_per_page, self.data_list)
+    self.data_list.count = self.students_list.get_student_short_count
     puts "Рефреш на стороне контроллера выполнен, уведомление об изменении вьюхи..."
     self.data_list.notify
   end

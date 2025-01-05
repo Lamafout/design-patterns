@@ -33,7 +33,6 @@ class Students_list_storage
     k = 1 if k < 1 
     student_list = self.strategy.read_list_of_students
 
-    if student_list[k * n - 1]
       filtered_list = filter.nil? ? student_list : filter.apply(student_list)
       student_short_list = filtered_list[((k-1) * n)...(k*n)].map do |student|
         Short_student.from_student(student)
@@ -46,9 +45,6 @@ class Students_list_storage
 
       result_data_list.observers = data_list.observers
       result_data_list
-    else
-      raise IndexError, 'Index out of range'
-    end
   end
 
   def sort # sort by surname and name

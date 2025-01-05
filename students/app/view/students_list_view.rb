@@ -15,11 +15,11 @@ class StudentListView < FXMainWindow
       self.controller = Students_list_controller.new(self)
       self.filters = {}
       self.current_page = 1
-      self.items_per_page = 10
-
+      self.items_per_page = 11
+      
       main_frame = FXHorizontalFrame.new(self, LAYOUT_FILL_X | LAYOUT_FILL_Y)
       main_frame.backColor = FXRGB(255, 255, 255)
-
+      
       filter_frame = FXVerticalFrame.new(main_frame, LAYOUT_FIX_WIDTH, width: 250, padding: 10)
       setup_filter_area(filter_frame)
       
@@ -30,6 +30,27 @@ class StudentListView < FXMainWindow
       setup_control_area(control_frame)
       
       refresh_data
+  end
+  def refresh_data
+    puts "Рефреш на стороне вьюхи выполнен, передача уведомления контроллеру..."
+    self.controller.refresh_data
+  end
+
+  def set_table_data(input_data_table)
+    clear_table
+    (0...input_data_table.count_of_rows - 1).each do |row|
+      (0...input_data_table.count_of_columns).each do |col|
+        self.table.setItemText(row, col, input_data_table.get_by_index(row, col).to_s)
+      end
+    end
+  end
+  
+  def set_table_params(column_names, entities_count)
+    column_names.each_with_index do |name, index|
+      self.table.setItemText(0, index, name)
+    end
+    self.total_pages = (entities_count / self.items_per_page.to_f).ceil
+    self.page_label = FXLabel.new(self, "Страница #{self.current_page} из #{self.total_pages}")
   end
 
   def setup_filter_area(parent)
@@ -201,15 +222,11 @@ class StudentListView < FXMainWindow
     end
   end
 
-  def refresh_data
-    self.current_page = 1
-    puts "Рефреш на стороне вьюхи выполнен, передача уведомления контроллеру..."
-    self.controller.refresh_data
-  end
 
   def change_page(offset)
     new_page = self.current_page + offset
-    if new_page < 1 || new_page > self.total_pages
+    puts "#{self.current_page}, #{new_page}"
+    if self.current_page + offset < 1 || self.current_page + offset > self.total_pages
       puts "Недопустимая страница: #{new_page}"
       return
     end
@@ -219,34 +236,12 @@ class StudentListView < FXMainWindow
   
 
   def sort_table_by_column(col_idx=0)
-    return if self.data.nil? || self.data.count_of_rows <= 1
-    headers = (0...self.data.count_of_columns).map {|col_idx| self.data.get_by_index(0, col_idx)}
-    rows = (1...self.data.count_of_rows).map do |row_idx|
-        (0...self.data.count_of_columns).map {|column_idx| self.data.get_by_index(row_idx, column_idx)}
-    end
-    self.sort_order ||= {}
-    self.sort_order[col_idx] = !sort_order.fetch(col_idx, false)
-    sorted_rows = rows.sort_by do |row| 
-        value = row[col_idx]
-        value.nil? ? "\xFF" * 1000 : value
-    end
-    sorted_rows.reverse! unless self.sort_order[col_idx]
-    all_data = [headers] + sorted_rows
-    self.data = Data_table.new(all_data)
+    #TODO realize
   end
 
   def create
       super
       show(PLACEMENT_SCREEN)
-  end
-
-  def update(input_data_table)
-    clear_table
-    (0...input_data_table.count_of_rows).each do |row|
-      (0...input_data_table.count_of_columns).each do |col|
-        self.table.setItemText(row, col, input_data_table.get_by_index(row, col).to_s)
-      end
-    end
   end
 
   def update_buttons_state

@@ -5,6 +5,7 @@ class Data_list
     self.list = list
     self.selected_indexes = []
     self.index = 0
+    self.count = 0
     self.observers = []
   end
 
@@ -46,11 +47,12 @@ class Data_list
 
   def notify
     self.observers.each do |observer|
-      observer.update(self.get_data)
+      observer.set_table_params(self.get_names, self.count)
+      observer.set_table_data(self.get_data)
     end
   end
 
-  attr_accessor :observers
+  attr_accessor :observers, :count
   
   private
   attr_accessor :selected_indexes, :index

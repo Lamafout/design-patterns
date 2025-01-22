@@ -47,7 +47,7 @@ class StudentListView < FXMainWindow
   
   def set_table_params(column_names, entities_count)
     column_names.each_with_index do |name, index|
-      self.table.setItemText(0, index, name)
+      self.table.setColumnText(index, name)
     end
     self.total_pages = (entities_count / self.items_per_page.to_f).ceil
     self.page_label.text = "Страница #{self.current_page} из #{self.total_pages}"

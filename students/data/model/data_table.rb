@@ -10,6 +10,7 @@ class Data_table
     result = nil
     if row_index >= 0 && row_index < data.length && column_index >= 0 && column_index < data[row_index].length
       result = data[row_index][column_index]
+      puts result
     else
       raise IndexError, "Index is out of range"
     end

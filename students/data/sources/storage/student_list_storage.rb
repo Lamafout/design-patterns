@@ -31,7 +31,7 @@ class Students_list_storage
 
   def get_k_n_student_short_list(k = 1, n = 10, data_list = nil, filter = nil)
     k = 1 if k < 1 
-    student_list = self.strategy.read_list_of_students
+    student_list = self.read_list_of_students
 
       filtered_list = filter.nil? ? student_list : filter.apply(student_list)
       student_short_list = filtered_list[((k-1) * n)...(k*n)].map do |student|
@@ -48,7 +48,7 @@ class Students_list_storage
   end
 
   def sort # sort by surname and name
-    students_list = self.strategy.read_list_of_students.sort_by do |student|
+    students_list = self.read_list_of_students.sort_by do |student|
       student.initials
     end
   end

@@ -8,7 +8,7 @@ class Data_list_student_short < Data_list
 
   private
   def row_from_attrs(data)
-    return [data.initials, data.git, data.contact]
+    return [data.id, data.initials, data.git, data.contact]
   end
 
   def element_type

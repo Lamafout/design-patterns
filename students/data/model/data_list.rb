@@ -26,7 +26,7 @@ class Data_list
     result_data = [get_names]
     self.list.each_with_index do |row,index|
       data = self.list[index]
-      new_row = [self.index].concat(row_from_attrs(data))
+      new_row = (row_from_attrs(data))
       result_data << new_row 
       self.index += 1
     end
